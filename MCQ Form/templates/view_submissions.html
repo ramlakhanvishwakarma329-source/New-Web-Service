@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+  <h3>Submissions</h3>
+  <div class="mb-3">
+    <a href="{{ url_for('download_reports') }}" class="btn btn-success">Download Excel (Summary+Details)</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead><tr><th>ID</th><th>Section</th><th>Name</th><th>Email</th><th>Time</th></tr></thead>
+    <tbody>
+      {% for s in subs %}
+        <tr>
+          <td>{{ s['id'] }}</td>
+          <td>{{ s['section_name'] }}</td>
+          <td>{{ s['name'] }}</td>
+          <td>{{ s['email'] }}</td>
+          <td>{{ s['timestamp'] }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5">No submissions yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

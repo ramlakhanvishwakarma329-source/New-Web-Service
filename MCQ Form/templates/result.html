@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+  <h3>Result for {{ submission['name'] or 'Anonymous' }} ({{ submission['email'] or 'no-email' }})</h3>
+  <p>Submitted at: {{ submission['timestamp'] }}</p>
+  <div class="mb-3">
+    <strong>Total Questions:</strong> {{ total }} &nbsp;
+    <strong>Correct:</strong> {{ correct }} &nbsp;
+    <strong>Wrong:</strong> {{ wrong }}
+  </div>
+
+  <div class="list-group">
+    {% for row in details %}
+      <div class="list-group-item">
+        <div><strong>Q:</strong> {{ row['question_text'] }}</div>
+        <div><strong>Your answer:</strong> {{ row['selected_text'] }}</div>
+        <div><strong>Correct answer:</strong> {{ row['correct_text'] }}</div>
+        <div><strong>Status:</strong>
+          {% if row['is_correct'] %}
+            <span class="text-success">Correct</span>
+          {% else %}
+            <span class="text-danger">Wrong</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

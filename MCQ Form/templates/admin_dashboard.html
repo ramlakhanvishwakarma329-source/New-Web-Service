@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+  <h3>Admin Dashboard</h3>
+  <div class="mb-3">
+    <a href="{{ url_for('create_section') }}" class="btn btn-success">Create Section</a>
+    <a href="{{ url_for('view_submissions') }}" class="btn btn-info">View Submissions</a>
+  </div>
+
+  <h5>Sections</h5>
+  <div class="list-group">
+    {% for s in sections %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>{{ s['name'] }} - {{ s['description'] or '' }}</div>
+        <div>
+          <a class="btn btn-sm btn-primary" href="{{ url_for('add_question', section_id=s['id']) }}">Add Questions</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('section_page', section_id=s['id']) }}" target="_blank">Open Form</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary">No sections yet.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

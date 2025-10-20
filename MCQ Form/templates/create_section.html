@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+  <h3>Create Section</h3>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Section name</label>
+      <input class="form-control" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" name="description"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Create</button>
+  </form>
+{% endblock %}

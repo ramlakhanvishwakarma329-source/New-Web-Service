@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>{{ section['name'] }}</h2>
+
+<form method="POST" action="{{ url_for('submit_section', section_id=section['id']) }}">
+  <div class="mb-3">
+    <label for="name" class="form-label">Your Name:</label>
+    <input type="text" name="name" id="name" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" name="email" id="email" class="form-control" required>
+  </div>
+
+  {% for q in questions %}
+  <div class="card mb-3">
+    <div class="card-header">
+      Q{{ loop.index }}. {{ q['text'] }}
+    </div>
+    <div class="card-body">
+      {% for opt in q['options'] %}
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="q_{{ q['id'] }}"
+          id="opt{{ loop.index0 }}_q{{ q['id'] }}"
+          value="{{ loop.index0 }}"
+          required
+        >
+        <label class="form-check-label" for="opt{{ loop.index0 }}_q{{ q['id'] }}">
+          {{ opt }}
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
